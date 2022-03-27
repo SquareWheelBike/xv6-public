@@ -498,7 +498,7 @@ int kill(int pid, int flag)
       {
         p->killed = 1;
         // Wake process from sleep if necessary.
-        if (p->state == SLEEPING)
+        if (p->state == SLEEPING || p->state == PAUSED)
         {
           p->state = RUNNABLE;
         }
@@ -510,7 +510,8 @@ int kill(int pid, int flag)
       }
       else
       {
-        break;
+        panic("invalid kill() flag! can only be 0 or 1\n");
+        break; // will never run
       }
       release(&ptable.lock);
       return 0;

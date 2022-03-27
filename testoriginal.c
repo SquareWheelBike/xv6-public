@@ -7,6 +7,7 @@ int main(void)
     int pid = fork();
     if (!pid) // child
     {
+        sleep(5);
         printf(1, "I am the child, my pid is %d\n", getpid());
         while (1)
         {
@@ -14,14 +15,11 @@ int main(void)
             printf(1, "child heartbeat <3\n");
         }
     }
-    sleep(10);
-    printf(1, "I am the parent, my pid is %d\n", getpid());
     // parent code
-    sleep(100);
-    printf(1, "parent killing child pid=%d...", pid);
-    kill(pid,0);
-    sleep(10);
-    printf(1, "done.\nexiting parent.\n");
-
+    printf(1, "I am the parent, my pid is %d\n", getpid());
+    sleep(100); // wait for a few heartbeats
+    printf(1, "parent killing child pid=%d...\n", pid);
+    kill(pid, 0);
+    printf(1, "done. exiting parent.\n");
     exit();
 }

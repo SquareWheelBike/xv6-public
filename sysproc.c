@@ -30,7 +30,7 @@ int sys_kill(void)
 
   if (argint(0, &pid) < 0)
     return -1;
-  if (argint(0, &flag) < 0)
+  if (argint(1, &flag) < 0)
     return -2;
 
   return kill(pid, flag);
@@ -86,4 +86,10 @@ int sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int sys_pause(void)
+{
+  pause();
+  return 0;
 }
