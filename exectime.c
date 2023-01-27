@@ -1,17 +1,18 @@
 // execute another command and time how long it takes to run
+// the number of command line arguments should not be fixed
 
-#include "user.h"
-#include "defs.h"
 #include "types.h"
+#include "stat.h"
+#include "user.h"
 
 int main(int argc, char *argv[])
 {
-    int pid, stime, etime, dtime;
+    int pid;
 
-    stime = uptime();
+    printf(1, "uptime: %d\n", uptime());
 
     if(argc < 2){
-        printf(2, "Usage: exectime cmd [args...]\n");
+        printf(2, "usage: exectime command argument-list\n");
         exit();
     }
 
@@ -30,8 +31,6 @@ int main(int argc, char *argv[])
 
     wait();
 
-    etime = uptime();
-    dtime = etime - stime;
-    printf(1, "%d %d %d\n", stime, etime, dtime);
+    printf(1, "uptime: %d\n", uptime());
     exit();
 }
